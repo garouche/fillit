@@ -6,7 +6,7 @@
 /*   By: garouche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/12 14:29:23 by garouche          #+#    #+#             */
-/*   Updated: 2016/12/20 10:17:47 by garouche         ###   ########.fr       */
+/*   Updated: 2017/04/27 15:06:16 by garouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,10 @@ void	ft_copy(char array[16][16], char (*tetri)[5], t_coord *tc, t_coord a)
 	}
 }
 
-t_coord	*ft_reset(char (**t)[5], t_coord *a, char buf[26][21])
+t_coord	*ft_reset(char (**t)[5], t_coord *a, char buf[26][21], t_coord *coord)
 {
-	t_coord *coord;
-
-	coord = NULL;
 	*t = (char(*)[5])buf[a->t];
-	coord = ft_copy_coord(*t, coord);
+	ft_copy_coord(*t, coord);
 	a->a = -1;
 	a->b = -1;
 	return (coord);
@@ -101,26 +98,26 @@ t_coord	*ft_reset(char (**t)[5], t_coord *a, char buf[26][21])
 
 int		ft_checksquare(char array[16][16], char buf[26][21], t_coord a, int nb)
 {
-	t_coord	*coord;
+	t_coord	coord;
 	char	(*tetri)[5];
 	t_coord	s;
 
-	coord = ft_reset(&tetri, &a, buf);
+	ft_reset(&tetri, &a, buf, &coord);
 	while (++a.a <= a.sq)
 	{
 		while (++a.b <= a.sq)
 		{
-			if (ft_checkin(array, tetri, coord, a))
+			if (ft_checkin(array, tetri, &coord, a))
 			{
 				if (a.t == nb)
 					return (1);
 				s = a;
-				ft_copy(array, tetri, coord, a);
+				ft_copy(array, tetri, &coord, a);
 				a.t++;
 				if (ft_checksquare(array, buf, a, nb))
 					return (1);
 				a = s;
-				ft_remove(array, tetri, coord, a);
+				ft_remove(array, tetri, &coord, a);
 			}
 		}
 		a.b = -1;

@@ -6,7 +6,7 @@
 #    By: garouche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 16:32:09 by garouche          #+#    #+#              #
-#    Updated: 2016/12/20 11:16:02 by garouche         ###   ########.fr        #
+#    Updated: 2017/02/06 10:19:55 by garouche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 .PHONY	: all clean re fclean
 
-LIBf	=	-Llibft/
 LIBDIR	=	libft/
-LIB		=	-lft
 LIBC	= 	$(LIBDIR)libft.a
 all		:	$(NAME) 
 
